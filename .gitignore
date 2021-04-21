@@ -6,4 +6,6 @@
 .cache/
 __pycache__/
 !test/*.c
+!example/*.c
+!example/*.s
 /nonmatchings

@@ -73,3 +73,10 @@ Many more randomization passes could be added, the scoring function is far from 
 the permuter could be made easier to use, etc. etc. The GitHub Issues list has some ideas.
 
 Ideally, `mypy permuter.py` and `./run-tests.sh` should succeed with no errors.
+
+## ARM example
+
+```
+./compile_example.sh
+./run_example.sh
+```
