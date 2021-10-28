@@ -62,6 +62,7 @@ class Options:
     use_network: bool = False
     network_debug: bool = False
     network_priority: float = 1.0
+    max_iterations: int = None
 
 
 def restricted_float(lo: float, hi: float) -> Callable[[str], float]:
@@ -343,6 +344,8 @@ def run_inner(options: Options, heartbeat: Callable[[], None]) -> List[int]:
                 found_zero = True
                 if options.stop_on_zero:
                     break
+            if options.max_iterations and context.iteration >= options.max_iterations:
+                break
     else:
         seed_iterators: List[Optional[Iterator[int]]] = [
             permuter.seed_iterator()
@@ -454,6 +457,8 @@ def run_inner(options: Options, heartbeat: Callable[[], None]) -> List[int]:
                     found_zero = True
                     if options.stop_on_zero:
                         break
+                if options.max_iterations and context.iteration >= options.max_iterations:
+                    break
             elif isinstance(feedback, NeedMoreWork):
                 task = get_task(source)
                 if task is not None:
@@ -613,6 +618,12 @@ def main() -> None:
             Each server runs with a priority threshold, which defaults to 0.1,
             below which they will not run permuter jobs at all.""",
     )
+    parser.add_argument(
+        "--max-iterations",
+        dest="max_iterations",
+        type=int,
+        help="""Maximum number of iterations to run for.""",
+    )
 
     args = parser.parse_args()
 
@@ -636,6 +647,7 @@ def main() -> None:
         use_network=args.use_network,
         network_debug=args.network_debug,
         network_priority=args.network_priority,
+        max_iterations=args.max_iterations
     )
 
     run(options)

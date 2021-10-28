@@ -25,6 +25,8 @@ class Compiler:
         ) as f2:
             o_name = f2.name
 
+        s_name = c_name[:-1] + 's'
+
         try:
             stderr = 2 if show_errors else subprocess.DEVNULL
             subprocess.check_call(
@@ -36,13 +38,16 @@ class Compiler:
             if not show_errors:
                 try_remove(c_name)
             try_remove(o_name)
+            try_remove(s_name)
             return None
         except KeyboardInterrupt:
             # If Ctrl+C happens during this call, make a best effort in
             # removing the .c and .o files. This is totally racy, but oh well...
             try_remove(c_name)
             try_remove(o_name)
+            try_remove(s_name)
             raise
 
         try_remove(c_name)
+        try_remove(s_name)
         return o_name
