@@ -108,7 +108,7 @@ def simplify_objdump(input_lines: List[str], *, stack_differences: bool) -> List
         row_parts = row.split("\t")
         if len(row_parts) == 1:
             row_parts.append('')
-        print(row_parts)
+        #print(row_parts)
         mnemonic, instr_args = row_parts
         if not stack_differences:
             if mnemonic == "addiu" and includes_sp.search(instr_args):
