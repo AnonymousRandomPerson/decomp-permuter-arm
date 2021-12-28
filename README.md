@@ -14,6 +14,8 @@ https://github.com/laqieer/decomp-permuter-arm has an ARM port.
 
 ## Usage
 
+`./permuter.py nonmatchings --stop-on-zero`
+
 `./permuter.py directory/` runs the permuter; see below for the meaning of the directory.
 Pass `-h` to see possible flags. `-j` is suggested (enables multi-threaded mode).
 
