@@ -235,7 +235,7 @@ def insert_decl(
 ) -> None:
     type = copy.deepcopy(type)
     decl = ca.Decl(
-        name=var, quals=[], storage=[], funcspec=[], type=type, init=None, bitsize=None
+        name=var, quals=[], storage=[], funcspec=[], type=type, init=None, bitsize=None, align=None
     )
     set_decl_name(decl)
     assert fn.body.block_items, "Non-empty function"
